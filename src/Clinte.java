@@ -25,7 +25,10 @@ public class Clinte {
 			
 			DataOutputStream codRoom = new DataOutputStream(
 					ClientSocket.getOutputStream());
-			codRoom.writeBytes("1234"+"\n");
+			codRoom.writeBytes("1233"+"\n");
+			
+			
+			
 						
 			System.out.println("chegou");
 		} catch (Exception e) {

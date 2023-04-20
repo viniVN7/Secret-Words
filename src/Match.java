@@ -7,14 +7,19 @@ public class Match extends Thread{
 	public ArrayList<Socket> lst = new ArrayList<Socket>();
 	private int qntPlay;
 	private int codRoom;
+	private String theme;
 	
-	Match(int qntplay, int codRoom){
-		this.qntPlay = qntplay;
+
+	
+	
+	
+	public Match(ArrayList<Socket> lst, int qntPlay, int codRoom, String theme) {
+
+		this.lst = lst;
+		this.qntPlay = qntPlay;
 		this.codRoom = codRoom;
+		this.theme = theme;
 	}
-	
-	
-	
 	public ArrayList<Socket> getLst() {
 		return lst;
 	}
