@@ -39,4 +39,19 @@ public class Match extends Thread{
 		this.codRoom = codRoom;
 	}	
 	
+	public void run()
+    {
+        int qtdAcertos = 0;
+        char[ ]  palavra = new char[] {'t','e','s','t','e'};
+        char[ ] painel = new char[palavra.length];
+       while(qtdAcertos<qtdAcertos){
+              // loop - faz um PARA para percorer os socket
+                   //loop - enquanto o jogador tiver acertando
+                   
+                        // se o jogador vencedor ele sai de todos os loops
+                        // se ele errar vai para o proximo jogador do para
+
+
+       }
+    }
 }
