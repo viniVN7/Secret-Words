@@ -9,9 +9,6 @@ public class Match extends Thread{
 	private int codRoom;
 	private String theme;
 	
-
-	
-	
 	
 	public Match(ArrayList<Socket> lst, int qntPlay, int codRoom, String theme) {
 
@@ -54,4 +51,15 @@ public class Match extends Thread{
 
        }
     }
+	
+	public static void stringToArray(String palavra) {
+		char[] vetorPalavra = new char[palavra.length()];
+		
+		char[] stringConvertida = palavra.toCharArray();
+		System.arraycopy(stringConvertida, 0, vetorPalavra, 0, stringConvertida.length);
+
+		for (char letra : vetorPalavra) {
+			System.out.println(letra);
+		}
+	}
 }

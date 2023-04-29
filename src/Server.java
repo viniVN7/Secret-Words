@@ -1,8 +1,6 @@
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 
 public class Server {
 
@@ -10,6 +8,14 @@ public class Server {
 
 	public static void main(String[] args) {
 
+		// Apenas para testar o método criado
+		/*
+		SelectWord themeWord = new SelectWord(null, null);		
+		themeWord.WordRondon();
+		System.out.println(themeWord.getTheme() + " " + themeWord.getWord());
+
+		Match.stringToArray(themeWord.getWord());
+		*/
 		try {
 
 			ServerSocket server = new ServerSocket(8000);
@@ -62,23 +68,10 @@ public class Server {
 			// TODO: handle exception
 		}
 
-		
-		
 		SelectWord sw = new SelectWord(null, null);
-		
-		
 		sw.WordRondon();
 		
 		System.out.println(sw.getTheme() + " " + sw.getWord());
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 }

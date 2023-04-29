@@ -1,13 +1,6 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
 
 public class SelectWord {
 	private String Word;
@@ -21,6 +14,7 @@ public class SelectWord {
 
 	public String WordRondon() {
 		ArrayList<Word> lst = new ArrayList<Word>();
+		
 		try {
 			File arquivoXlsx = new File("./File/FileWord.csv");
 			
