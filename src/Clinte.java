@@ -20,17 +20,36 @@ public class Clinte {
 			
 			DataOutputStream outQ = new DataOutputStream(
 					ClientSocket.getOutputStream());
-			msn = "2";
+			msn = "1";
 			outQ.writeBytes(msn + "\n");
 			
 			DataOutputStream codRoom = new DataOutputStream(
 					ClientSocket.getOutputStream());
 			codRoom.writeBytes("1233"+"\n");
 			
+			while(true) {
+				System.out.println("loop");
+				
+				InputStream in = ClientSocket.getInputStream();
+
+				byte[] b = new byte[1024];
+				
+				String menssagem = new String(b,0,in.read(b));
+				String txt2 = new String(b,0,in.read(b));
+				System.out.println(menssagem +" "+ txt2);
+				
+				
+				OutputStream out = ClientSocket.getOutputStream();
+				
+				out.write("chegou".getBytes());
+				out.flush();
+				
+				
+				
+			}
 			
+					
 			
-						
-			System.out.println("chegou");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

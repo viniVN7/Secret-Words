@@ -10,6 +10,7 @@ public class Match extends Thread{
 	private String theme;
 	
 	
+	
 	public Match(ArrayList<Socket> lst, int qntPlay, int codRoom, String theme) {
 
 		this.lst = lst;
@@ -38,18 +39,55 @@ public class Match extends Thread{
 	
 	public void run()
     {
-        int qtdAcertos = 0;
-        char[ ]  palavra = new char[] {'t','e','s','t','e'};
-        char[ ] painel = new char[palavra.length];
-       while(qtdAcertos<qtdAcertos){
-              // loop - faz um PARA para percorer os socket
-                   //loop - enquanto o jogador tiver acertando
-                   
-                        // se o jogador vencedor ele sai de todos os loops
-                        // se ele errar vai para o proximo jogador do para
+		
+		try {
+			
+			
+			
+//			
+//	        int qtdAcertos = 0;
+//	        char[ ]  palavra = new char[] {'t','e','s','t','e'};
+//	        char[ ] painel = new char[palavra.length];
+	        
+	        boolean hit = true;
+	        
+	        
+	        
+	  //     while(qtdAcertos<qtdAcertos){
+	              // loop - faz um PARA para percorer os socket
+	                   //loop - enquanto o jogador tiver acertando
+	                   
+	                        // se o jogador vencedor ele sai de todos os loops
+	                        // se ele errar vai para o proximo jogador do para
+	    	   while(true) {   
+	    		   for (Socket player : this.lst) {
+					while(hit) {
+						
+						OutputStream out = player.getOutputStream();
+						out.write("teste".getBytes());
+						out.flush();
+						out.write("teste2".getBytes());
+						
+						InputStream in = player.getInputStream();
+						
+						byte[] b = new byte[1024];
+						
+						System.out.println(new String(b,0,in.read(b)));
+						
+						
+						
+					}
+				}
+	    	   }
 
 
-       }
+	     //  }
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+
     }
 	
 	public static void stringToArray(String palavra) {

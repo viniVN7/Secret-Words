@@ -29,7 +29,6 @@ public class Server {
 				String codRoom = in.readLine();
 
 				System.out.println(resMatch + " " + resQunat + " " + codRoom);
-
 				int qntplay = Integer.parseInt(resQunat);
 				int res = Integer.parseInt(resMatch);
 				int room = Integer.parseInt(codRoom);
@@ -41,6 +40,9 @@ public class Server {
 					lst.add(match);
 					match.lst.add(s);
 					System.out.println("esta aqui!!");
+					if (match.lst.size() == 1) {
+						match.start();
+					}
 				} else if (res == 2) {
 
 					for (Match l : lst) {
