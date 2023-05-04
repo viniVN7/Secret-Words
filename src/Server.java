@@ -40,7 +40,7 @@ public class Server {
 					lst.add(match);
 					match.lst.add(s);
 					System.out.println("esta aqui!!");
-					if (match.lst.size() == 1) {
+					if (match.lst.size() == qntplay) {
 						match.start();
 					}
 				} else if (res == 2) {
@@ -48,7 +48,9 @@ public class Server {
 					for (Match l : lst) {
 						if(l.getCodRoom() == room) {
 							l.lst.add(s);
-							if (lst.size()==l.getQntPlay()){
+							System.out.println("quanditade de jogadores" + l.lst.size() + "quantidade da sala" + qntplay);
+							if (l.lst.size()==l.getQntPlay()){
+								
 								l.start();
 							}
 						}

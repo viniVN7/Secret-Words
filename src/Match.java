@@ -61,6 +61,7 @@ public class Match extends Thread{
 	                        // se ele errar vai para o proximo jogador do para
 	    	   while(true) {   
 	    		   for (Socket player : this.lst) {
+	    			hit = true;
 					while(hit) {
 						
 						OutputStream out = player.getOutputStream();
@@ -74,7 +75,7 @@ public class Match extends Thread{
 						
 						System.out.println(new String(b,0,in.read(b)));
 						
-						
+						hit = false;
 						
 					}
 				}
