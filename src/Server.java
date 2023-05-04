@@ -36,7 +36,9 @@ public class Server {
 				
 				if (res == 1) {
 					ArrayList<Socket> lstS = new ArrayList<Socket>();
-					Match match = new Match(lstS, qntplay, room, "Carro");
+					SelectWord sw = new SelectWord(null, null);
+					sw.WordRondon();
+					Match match = new Match(lstS, qntplay, room, sw.getTheme(),sw.getWord());
 					lst.add(match);
 					match.lst.add(s);
 					System.out.println("esta aqui!!");
@@ -72,10 +74,6 @@ public class Server {
 			// TODO: handle exception
 		}
 
-		SelectWord sw = new SelectWord(null, null);
-		sw.WordRondon();
-		
-		System.out.println(sw.getTheme() + " " + sw.getWord());
 	}
 
 }
