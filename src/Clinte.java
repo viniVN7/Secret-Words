@@ -11,7 +11,7 @@ public class Clinte {
 			System.out.println("Entrar em partida existente");
 			System.out.println("Entrar em partida");
 
-			Socket ClientSocket = new Socket("10.50.164.168", 8000);
+			Socket ClientSocket = new Socket("localhost", 8000);
 
 			String msn = "1";
 
