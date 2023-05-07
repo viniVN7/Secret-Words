@@ -10,11 +10,9 @@ public class Teste {
 		String a = Integer.toString(te);
 		
 		System.out.println(a.contains("7"));
-		
-		
+			
 
 	}
-	
 	
 	
 	public static char[]  stringToArray(String palavra) {

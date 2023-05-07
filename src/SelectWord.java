@@ -26,21 +26,21 @@ public class SelectWord {
 			read.nextLine();
 			
 			while(read.hasNext()) {
-				Word w = new Word();
+				Word word = new Word();
 				line = read.nextLine();
 				
 				String []value = line.split(";");
 				
 
-					w.setId(value[0]);
-					w.setTheme(value[1]);
-					w.setP1(value[2]);
-					w.setP2(value[3]);
-					w.setP3(value[4]);
-					w.setP4(value[5]);
-					w.setP5(value[6]);
+					word.setId(value[0]);
+					word.setTheme(value[1]);
+					word.setP1(value[2]);
+					word.setP2(value[3]);
+					word.setP3(value[4]);
+					word.setP4(value[5]);
+					word.setP5(value[6]);
 					
-					lst.add(w);
+					lst.add(word);
 				
 			}
 			int contW = 3;
@@ -83,8 +83,4 @@ public class SelectWord {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	
-	
-	
 }

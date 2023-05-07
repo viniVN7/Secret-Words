@@ -81,12 +81,9 @@ public class Match extends Thread {
 							System.out.println("entrou aqui");
 							for (Socket s : this.lst) {
 								out = s.getOutputStream();
-;								out.write("s".getBytes());
+								out.write("s".getBytes());
 								out.flush();
 							}
-							
-
-							
 							
 							for (Socket c : this.lst) {
 								for (int i = 0; i < vetorWord.length; i++) {
@@ -100,8 +97,6 @@ public class Match extends Thread {
 								out.write("fim".getBytes());
 								out.flush();
 							}
-							
-							
 							
 							
 //							for (int i = 0; i < vetorWord.length; i++) {
@@ -118,15 +113,10 @@ public class Match extends Thread {
 //								}
 //							}
 						}
-
-						
-
 						hit = false;
-
 					}
 				}
 			}
-
 			// }
 
 		} catch (Exception e) {

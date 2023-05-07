@@ -106,39 +106,39 @@ public class GameInterface {
                 menuInicial.dispose();
                 // button.setEnabled(false);
 
-                JLabel label1 = new JLabel("Nº de jogadores:");
-                label1.setFont(LABEL_FONT);
-                label1.setForeground(new Color(231, 231, 231));
-                label1.setBounds(20, 230, 150, 20);
-                menuCriarSala.add(label1);
+                JLabel numberPlayersLabel = new JLabel("Nº de jogadores:");
+                numberPlayersLabel.setFont(LABEL_FONT);
+                numberPlayersLabel.setForeground(new Color(231, 231, 231));
+                numberPlayersLabel.setBounds(20, 230, 150, 20);
+                menuCriarSala.add(numberPlayersLabel);
 
-                JTextField textField1 = new JTextField();
-                textField1.setBounds(180, 230, 150, 20);
-                textField1.setFont(new Font("Cambria", Font.BOLD, 14));
-                menuCriarSala.add(textField1);
+                JTextField numberPlayersText = new JTextField();
+                numberPlayersText.setBounds(180, 230, 150, 20);
+                numberPlayersText.setFont(new Font("Cambria", Font.BOLD, 14));
+                menuCriarSala.add(numberPlayersText);
 
-                JLabel label2 = new JLabel("Tema:");
-                label2.setFont(LABEL_FONT);
-                label2.setForeground(new Color(231, 231, 231));
-                label2.setBounds(20, 260, 150, 20);
-                menuCriarSala.add(label2);
+                JLabel themeLabel = new JLabel("Tema:");
+                themeLabel.setFont(LABEL_FONT);
+                themeLabel.setForeground(new Color(231, 231, 231));
+                themeLabel.setBounds(20, 260, 150, 20);
+                menuCriarSala.add(themeLabel);
 
-                JComboBox<String> comboBox = new JComboBox<String>();
-                comboBox.setBackground(new Color(255, 254, 254));
-                comboBox.setBounds(180, 260, 150, 20);
-                comboBox.setFont(new Font("Cambria", Font.BOLD, 14));
-                comboBox.addItem("Tema 1");
-                comboBox.addItem("Tema 2");
-                comboBox.addItem("Tema 3");
-                comboBox.addItem("Tema 4");
-                comboBox.addItem("Tema 5");
-                menuCriarSala.add(comboBox);
+                JComboBox<String> themeComboBox = new JComboBox<String>();
+                themeComboBox.setBackground(new Color(255, 254, 254));
+                themeComboBox.setBounds(180, 260, 150, 20);
+                themeComboBox.setFont(new Font("Cambria", Font.BOLD, 14));
+                themeComboBox.addItem("Tema 1");
+                themeComboBox.addItem("Tema 2");
+                themeComboBox.addItem("Tema 3");
+                themeComboBox.addItem("Tema 4");
+                themeComboBox.addItem("Tema 5");
+                menuCriarSala.add(themeComboBox);
 
-                JLabel label3 = new JLabel("Código:");
-                label3.setFont(LABEL_FONT);
-                label3.setForeground(new Color(231, 231, 231));
-                label3.setBounds(20, 290, 150, 20);
-                menuCriarSala.add(label3);
+                JLabel codeRoomLabel = new JLabel("Código:");
+                codeRoomLabel.setFont(LABEL_FONT);
+                codeRoomLabel.setForeground(new Color(231, 231, 231));
+                codeRoomLabel.setBounds(20, 290, 150, 20);
+                menuCriarSala.add(codeRoomLabel);
 
                 // Gera um n�mero aleat�rio e o converte em uma string
                 int codigo = new Random().nextInt(10000);
@@ -181,43 +181,43 @@ public class GameInterface {
 
                 btnCriar.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        JFrame novaJanela = new JFrame("Nova Janela");
-                        novaJanela.setSize(900, 600);
-                        novaJanela.setLocationRelativeTo(null);
-                        novaJanela.setVisible(true);
-                        novaJanela.setLayout(null);
-                        novaJanela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        JFrame matchFrame = new JFrame("Nova Janela");
+                        matchFrame.setSize(900, 600);
+                        matchFrame.setLocationRelativeTo(null);
+                        matchFrame.setVisible(true);
+                        matchFrame.setLayout(null);
+                        matchFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         menuCriarSala.dispose();
 
-                        novaJanela.getContentPane().setBackground(BACKGROUND_COLOR);
+                        matchFrame.getContentPane().setBackground(BACKGROUND_COLOR);
 
                         JLabel silvio = new JLabel();
                         silvio.setIcon(avatarSilvioSantos);
                         // label.setHorizontalAlignment(JLabel.RIGHT);
                         silvio.setBounds(510, 70, 1000, 550);
 
-                        novaJanela.add(silvio);
+                        matchFrame.add(silvio);
 
                         JLabel rodaLabel = new JLabel();
                         rodaLabel.setIcon(placas);
                         rodaLabel.setBounds(-150, 70, 800, 500);
-                        novaJanela.add(rodaLabel);
+                        matchFrame.add(rodaLabel);
 
                         JLabel jlTema = new JLabel();
                         jlTema.setIcon(imgTema);
                         jlTema.setFont(LABEL_FONT);
                         jlTema.setBounds(-140, 260, 800, 500);
-                        novaJanela.add(jlTema);
+                        matchFrame.add(jlTema);
 
                         JLabel jlRoda = new JLabel();
                         jlRoda.setIcon(roda);
                         jlRoda.setBounds(-320, -130, 800, 500);
-                        novaJanela.add(jlRoda);
+                        matchFrame.add(jlRoda);
 
                         JLabel jlJogadores = new JLabel();
                         jlJogadores.setIcon(jogadores);
                         jlJogadores.setBounds(60, -180, 800, 500);
-                        novaJanela.add(jlJogadores);
+                        matchFrame.add(jlJogadores);
 
                         /*
                          * JTextField PortText = null;

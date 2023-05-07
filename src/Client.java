@@ -2,7 +2,7 @@ import java.net.*;
 import java.util.Scanner;
 import java.io.*;
 
-public class Clinte {
+public class Client {
 
 	public static void main(String[] args) {
 
@@ -15,15 +15,15 @@ public class Clinte {
 
 			String msn = "1";
 
-			DataOutputStream outType = new DataOutputStream(ClientSocket.getOutputStream());
-			outType.writeBytes(msn + "\n");
+			DataOutputStream outOptionMatch = new DataOutputStream(ClientSocket.getOutputStream());
+			outOptionMatch.writeBytes(msn + "\n");
 
-			DataOutputStream outQ = new DataOutputStream(ClientSocket.getOutputStream());
+			DataOutputStream outNumberPlayers = new DataOutputStream(ClientSocket.getOutputStream());
 			msn = "1";
-			outQ.writeBytes(msn + "\n");
+			outNumberPlayers.writeBytes(msn + "\n");
 
-			DataOutputStream codRoom = new DataOutputStream(ClientSocket.getOutputStream());
-			codRoom.writeBytes("1233" + "\n");
+			DataOutputStream outCodeRoom = new DataOutputStream(ClientSocket.getOutputStream());
+			outCodeRoom.writeBytes("1233" + "\n");
 
 			while (true) {
 				System.out.println("loop");
@@ -33,32 +33,27 @@ public class Clinte {
 				byte[] b = new byte[1024];
 
 				String menssagem = new String(b, 0, in.read(b));
-				//System.out.println("menssagem "+ menssagem);
+				// System.out.println("menssagem "+ menssagem);
 				if (menssagem.equals("1")) {
-					//System.out.println("ta aqui");
+					// System.out.println("ta aqui");
 					String a = null;
 					OutputStream out = ClientSocket.getOutputStream();
 					out.write("r".getBytes());
 					out.flush();
 
 					String acept = new String(b, 0, in.read(b));
-					
-					
-					BufferedReader inFromClient = new BufferedReader(
-							new InputStreamReader(ClientSocket.getInputStream()));
-					
-					
-					
+
+					BufferedReader inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
+
 					if (acept.equals("s")) {
 						System.out.println("ta na parte dois");
-					
+
 						String posicao;
-						while (( posicao = inFromClient.readLine())!= "fim") {
-							
+						while ((posicao = inFromClient.readLine()) != "fim") {
+
 							System.out.println("Posicao: " + posicao);
 						}
-						
-						
+
 //						while (a != "fim") {
 //							byte[] r = new byte[1024];
 //

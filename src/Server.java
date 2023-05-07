@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class Server {
 
-	public static ArrayList<Match> lst = new ArrayList<Match>();
+	public static final int CRIAR_SALA = 1;
+	public static final int ENTRAR_SALA = 2;
+	
+	public static ArrayList<Match> matches = new ArrayList<Match>();
 
 	public static void main(String[] args) {
 
-		// Apenas para testar o mÃ©todo criado
+		// Apenas para testar o método criado
 		/*
 		SelectWord themeWord = new SelectWord(null, null);		
 		themeWord.WordRondon();
@@ -24,47 +27,49 @@ public class Server {
 
 				BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
-				String resMatch = in.readLine();
-				String resQunat = in.readLine();
-				String codRoom = in.readLine();
+				String optionMatchResponse = in.readLine();
+				String numberPlayersResponse = in.readLine();
+				String codeRoomResponse = in.readLine();
 
-				System.out.println(resMatch + " " + resQunat + " " + codRoom);
-				int qntplay = Integer.parseInt(resQunat);
-				int res = Integer.parseInt(resMatch);
-				int room = Integer.parseInt(codRoom);
-				System.out.println("resMatch" + res);
+				System.out.println(optionMatchResponse + " " + numberPlayersResponse + " " + codeRoomResponse);
+				int qntplay = Integer.parseInt(numberPlayersResponse);
+				int opcaoPartida = Integer.parseInt(optionMatchResponse);
+				int room = Integer.parseInt(codeRoomResponse);
+				System.out.println("resMatch" + opcaoPartida);
 				
-				if (res == 1) {
+				if (opcaoPartida == CRIAR_SALA) {
 					ArrayList<Socket> lstS = new ArrayList<Socket>();
 					SelectWord sw = new SelectWord(null, null);
 					sw.WordRondon();
+					
 					Match match = new Match(lstS, qntplay, room, sw.getTheme(),sw.getWord());
-					lst.add(match);
+					matches.add(match);
 					match.lst.add(s);
+					
 					System.out.println("esta aqui!!");
 					if (match.lst.size() == qntplay) {
 						match.start();
 					}
-				} else if (res == 2) {
+				} else if (opcaoPartida == ENTRAR_SALA) {
 
-					for (Match l : lst) {
-						if(l.getCodRoom() == room) {
-							l.lst.add(s);
-							System.out.println("quanditade de jogadores" + l.lst.size() + "quantidade da sala" + qntplay);
-							if (l.lst.size()==l.getQntPlay()){
-								
-								l.start();
+					for (Match partida : matches) {
+						if(partida.getCodRoom() == room) {
+							partida.lst.add(s);
+							
+							System.out.println("quantidade de jogadores" + partida.lst.size() + "quantidade da sala" + qntplay);
+							if (partida.lst.size() == partida.getQntPlay()){
+								partida.start();
 							}
 						}
-						for ( Socket ls: l.getLst()) {
-							System.out.println("porta: " + ls.getPort());
+						for (Socket socketMatch: partida.getLst()) {
+							System.out.println("porta: " + socketMatch.getPort());
 						}
 					}
 				}
 				
 				System.out.println("salas");
-				for (Match l : lst) {
-					System.out.println(l.getCodRoom());
+				for (Match match : matches) {
+					System.out.println(match.getCodRoom());
 				}
 
 
