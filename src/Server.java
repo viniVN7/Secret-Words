@@ -11,7 +11,7 @@ public class Server {
 
 	public static void main(String[] args) {
 
-		// Apenas para testar o método criado
+		// Apenas para testar o mï¿½todo criado
 		/*
 		SelectWord themeWord = new SelectWord(null, null);		
 		themeWord.WordRondon();
@@ -46,7 +46,7 @@ public class Server {
 					matches.add(match);
 					match.lst.add(s);
 					
-					System.out.println("esta aqui!!");
+					
 					if (match.lst.size() == qntplay) {
 						match.start();
 					}

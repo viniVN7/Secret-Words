@@ -13,60 +13,67 @@ public class Client {
 
 			Socket ClientSocket = new Socket("localhost", 8000);
 
-			String msn = "1";
 
 			DataOutputStream outOptionMatch = new DataOutputStream(ClientSocket.getOutputStream());
-			outOptionMatch.writeBytes(msn + "\n");
-
-			DataOutputStream outNumberPlayers = new DataOutputStream(ClientSocket.getOutputStream());
-			msn = "1";
-			outNumberPlayers.writeBytes(msn + "\n");
-
-			DataOutputStream outCodeRoom = new DataOutputStream(ClientSocket.getOutputStream());
-			outCodeRoom.writeBytes("1233" + "\n");
-
+			
+			//Enviar opção partida
+			outOptionMatch.flush();
+			outOptionMatch.writeBytes("1" + "\n");
+			outOptionMatch.flush();
+			
+			//Enviar quanditades de jogadores
+			outOptionMatch.writeBytes("1" + "\n");
+			outOptionMatch.flush();
+			
+			//Enviar codgo da sala
+			outOptionMatch.writeBytes("1233" + "\n");
+			outOptionMatch.flush();
+			
 			while (true) {
 				System.out.println("loop");
 
-				InputStream in = ClientSocket.getInputStream();
+				BufferedReader inFromClient = new BufferedReader(
+						new InputStreamReader(ClientSocket.getInputStream()));
 
-				byte[] b = new byte[1024];
-
-				String menssagem = new String(b, 0, in.read(b));
-				// System.out.println("menssagem "+ menssagem);
+				System.out.println("esta aqui depois do loop");
+				String menssagem = inFromClient.readLine();
+				System.out.println("menssagem " + menssagem);
 				if (menssagem.equals("1")) {
 					// System.out.println("ta aqui");
-					String a = null;
 					OutputStream out = ClientSocket.getOutputStream();
-					out.write("r".getBytes());
+					out.flush();
+					out.write(("r"+"\n").getBytes());
 					out.flush();
 
-					String acept = new String(b, 0, in.read(b));
+					String acept = inFromClient.readLine();
 
-					BufferedReader inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
 
 					if (acept.equals("s")) {
 						System.out.println("ta na parte dois");
 
-						String posicao;
-						while ((posicao = inFromClient.readLine()) != "fim") {
+						String posicao = null;
+						while (!(posicao = inFromClient.readLine()).equals("fim")) {
 
 							System.out.println("Posicao: " + posicao);
+							String letra = inFromClient.readLine();
+							System.out.println(letra);
+
 						}
+						inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
 
-//						while (a != "fim") {
-//							byte[] r = new byte[1024];
-//
-//							String posicao = new String(r, 0, in.read(r));
-//							String letra = new String(r, 0, in.read(r));
-//							String hit = new String(r, 0, in.read(r));
-//
-//							System.out.println(posicao + " " + letra + " " + hit);
-//
-//						}
 					}
-				}
+				} else {
 
+					String posicao = null;
+					while (!(posicao = inFromClient.readLine()).equals("fim")) {
+
+						System.out.println("Posicao: " + posicao);
+						String letra = inFromClient.readLine();
+						System.out.println(letra);
+
+					}
+					inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
+				}
 			}
 
 		} catch (Exception e) {

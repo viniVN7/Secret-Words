@@ -66,22 +66,27 @@ public class Match extends Thread {
 				for (Socket player : this.lst) {
 					hit = true;
 					while (hit) {
-
+						String num = "1";
 						OutputStream out = player.getOutputStream();
-						out.write("1".getBytes());
+						System.out.println("Porta :" + player.getPort());
 						out.flush();
-
-						InputStream in = player.getInputStream();
-
-						byte[] b = new byte[1024];
-						String letra = new String(b, 0, in.read(b));
+						out.write((num + "\n").getBytes());
+						out.flush();
 						
+
+						BufferedReader inFromMatch = new BufferedReader(
+								new InputStreamReader(player.getInputStream()));
+
+					
+						String letra = inFromMatch.readLine();
+						System.out.println("Letra recepida" + letra);
 
 						if (this.Word.contains(letra)) {
 							System.out.println("entrou aqui");
 							for (Socket s : this.lst) {
 								out = s.getOutputStream();
-								out.write("s".getBytes());
+								out.flush();
+								out.write(("s" + "\n").getBytes());
 								out.flush();
 							}
 							
@@ -90,30 +95,28 @@ public class Match extends Thread {
 									if (vetorWord[i] == letra.charAt(0)) {
 										System.out.println("passou 1");
 										out = c.getOutputStream();
+										out.flush();
 										out.write((Integer.toString(i)+"\n").getBytes()); 
 										out.flush();
+										out.write((letra + "\n").getBytes());
+										out.flush();
+										
 									}
 								}
-								out.write("fim".getBytes());
+								out.flush();
+								out.write(("fim" + "\n").getBytes());
 								out.flush();
 							}
 							
-							
-//							for (int i = 0; i < vetorWord.length; i++) {
-//								if (vetorWord[i] == letra.toUpperCase().charAt(0)) {
-//									for (Socket c : this.lst) {
-//										out = c.getOutputStream();
-//										out.write(Integer.toString(i).getBytes()); 
-//										out.flush();
-//										out.write(letra.getBytes());
-//										out.flush();
-//										out.write("n".getBytes());
-//										out.flush();
-//									}
-//								}
-//							}
 						}
-						hit = false;
+						inFromMatch = new BufferedReader(
+								new InputStreamReader(player.getInputStream()));
+						if(this.Word.contains(letra)) {
+							System.out.println("esta aqui no if");
+							hit = true;}
+						else {
+							hit = false;
+						}
 					}
 				}
 			}
