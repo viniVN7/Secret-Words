@@ -34,17 +34,19 @@ public class Client {
 
 				BufferedReader inFromClient = new BufferedReader(
 						new InputStreamReader(ClientSocket.getInputStream()));
-
-				System.out.println("esta aqui depois do loop");
+				//Recebendo confirmação do servidor
 				String menssagem = inFromClient.readLine();
+				System.out.println("esta aqui depois do loop");
 				System.out.println("menssagem " + menssagem);
 				if (menssagem.equals("1")) {
-					// System.out.println("ta aqui");
-					OutputStream out = ClientSocket.getOutputStream();
+					// 
+					DataOutputStream out = new DataOutputStream(ClientSocket.getOutputStream());
 					out.flush();
+					//Enviando letra para o servidor 
 					out.write(("r"+"\n").getBytes());
 					out.flush();
-
+					
+					//Recebendo confirmação do servidor
 					String acept = inFromClient.readLine();
 
 
@@ -52,6 +54,7 @@ public class Client {
 						System.out.println("ta na parte dois");
 
 						String posicao = null;
+						//Enquanto não receber "fim", ficar recebendo a letra e a posição da letra
 						while (!(posicao = inFromClient.readLine()).equals("fim")) {
 
 							System.out.println("Posicao: " + posicao);
@@ -60,6 +63,7 @@ public class Client {
 
 						}
 						inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
+				
 
 					}
 				} else {

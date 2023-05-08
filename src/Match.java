@@ -66,25 +66,25 @@ public class Match extends Thread {
 				for (Socket player : this.lst) {
 					hit = true;
 					while (hit) {
-						String num = "1";
-						OutputStream out = player.getOutputStream();
+						
+						//Envia confirmação para o cliente
+
+						DataOutputStream out = new DataOutputStream(player.getOutputStream());
 						System.out.println("Porta :" + player.getPort());
 						out.flush();
-						out.write((num + "\n").getBytes());
+						out.write(("1" + "\n").getBytes());
 						out.flush();
-						
-
+						sleep(500);
+						//Recebe letra do do cliente
 						BufferedReader inFromMatch = new BufferedReader(
 								new InputStreamReader(player.getInputStream()));
-
-					
+						
+						//sleep(1000);
+						
 						String letra = inFromMatch.readLine();
-						System.out.println("Letra recepida" + letra);
-
+						System.out.println("Letra recepida: " + letra);
 						if (this.Word.contains(letra)) {
-							System.out.println("entrou aqui");
 							for (Socket s : this.lst) {
-								out = s.getOutputStream();
 								out.flush();
 								out.write(("s" + "\n").getBytes());
 								out.flush();
@@ -93,8 +93,6 @@ public class Match extends Thread {
 							for (Socket c : this.lst) {
 								for (int i = 0; i < vetorWord.length; i++) {
 									if (vetorWord[i] == letra.charAt(0)) {
-										System.out.println("passou 1");
-										out = c.getOutputStream();
 										out.flush();
 										out.write((Integer.toString(i)+"\n").getBytes()); 
 										out.flush();
