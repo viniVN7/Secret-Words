@@ -11,7 +11,7 @@ public class Client {
 			System.out.println("Entrar em partida existente");
 			System.out.println("Entrar em partida");
 
-			Socket ClientSocket = new Socket("localhost", 8000);
+			Socket ClientSocket = new Socket("10.50.164.168", 8000);
 
 
 			DataOutputStream outOptionMatch = new DataOutputStream(ClientSocket.getOutputStream());
@@ -42,8 +42,12 @@ public class Client {
 					// 
 					DataOutputStream out = new DataOutputStream(ClientSocket.getOutputStream());
 					out.flush();
+					
+					System.out.println("Digite uma letra");
+					Scanner s = new Scanner(System.in);
+					String msn = s.nextLine();
 					//Enviando letra para o servidor 
-					out.write(("r"+"\n").getBytes());
+					out.write((msn+"\n").getBytes());
 					out.flush();
 					
 					//Recebendo confirmação do servidor
