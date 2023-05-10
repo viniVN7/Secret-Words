@@ -18,11 +18,11 @@ public class Client {
 			
 			//Enviar opção partida
 			
-			out.writeBytes("1" + "\n");
+			out.writeBytes("2" + "\n");
 			out.flush();
 			
 			//Enviar quanditades de jogadores
-			out.writeBytes("1" + "\n");
+			out.writeBytes("2" + "\n");
 			out.flush();
 			
 			//Enviar codgo da sala
@@ -42,9 +42,9 @@ public class Client {
 					// 		
 					System.out.println("Digite uma letra");
 					Scanner s = new Scanner(System.in);
-					//String msn = s.nextLine();
+					String msn = s.nextLine();
 					//Enviando letra para o servidor 
-					out.write(("M"+"\n").getBytes());
+					out.write((msn+"\n").getBytes());
 					out.flush();
 					
 					//Recebendo confirmação do servidor

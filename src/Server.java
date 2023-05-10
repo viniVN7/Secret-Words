@@ -42,6 +42,7 @@ public class Server {
 					SelectWord sw = new SelectWord(null, null);
 					sw.WordRondon();
 					
+					System.out.println("palavra :" + sw.getWord() + "Tema: " + sw.getTheme() );
 					Match match = new Match(lstS, qntplay, room, sw.getTheme(),sw.getWord());
 					matches.add(match);
 					match.lst.add(s);

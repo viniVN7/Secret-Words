@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SelectWord {
@@ -43,12 +44,25 @@ public class SelectWord {
 					lst.add(word);
 				
 			}
-			int contW = 3;
+			
+			Random r = new Random();
+			
+			int contW = r.nextInt(2) + 1;
 			for (Word word : lst) {
-				if(Integer.parseInt(word.getId()) == 2) {
+				if(Integer.parseInt(word.getId()) == contW) {
 					this.theme = word.getTheme();
-					if(contW == 3) {
+					int contL = r.nextInt(5) + 1;
+					if(contL == 1) {
+						this.Word = word.getP1();
+					}else if(contL == 2) {
+						this.Word = word.getP2();
+					}else if(contL == 3) {
 						this.Word = word.getP3();
+					}else if(contL == 4) {
+						this.Word = word.getP4();
+					}
+					else if(contL == 5) {
+						this.Word = word.getP5();
 					}
 				}
 			}
