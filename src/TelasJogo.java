@@ -170,6 +170,7 @@ public class TelasJogo extends JFrame {
 
                 btnCriar.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                    	client.Conectar("1", numberPlayersText.getText(), codigoLabel.getText());
                         matchFrame(menuCriarSala);
                     }
 

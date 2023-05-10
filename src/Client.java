@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Client {
 
-	public void Conectar(String a) {
+	public void Conectar(String TipoPartida, String qtJogadores, String Codigo) {
 
 		try {
 			System.out.println("Criar partida privada");
@@ -19,15 +19,15 @@ public class Client {
 			// Enviar opção partida
 			
 			
-			out.writeBytes(a + "\n");
+			out.writeBytes(TipoPartida + "\n");
 			out.flush();
 
 			// Enviar quanditades de jogadores
-			out.writeBytes("2" + "\n");
+			out.writeBytes(qtJogadores + "\n");
 			out.flush();
 
 			// Enviar codgo da sala
-			out.writeBytes("1233" + "\n");
+			out.writeBytes(Codigo + "\n");
 			out.flush();
 
 			BufferedReader inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
