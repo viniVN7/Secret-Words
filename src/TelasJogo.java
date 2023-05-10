@@ -24,6 +24,8 @@ public class TelasJogo extends JFrame {
 	private static ImageIcon roda;
 	private static ImageIcon jogadores;
 
+	private Client client = new Client();
+	
 	public TelasJogo() {
 		initImages();
 
@@ -75,7 +77,7 @@ public class TelasJogo extends JFrame {
 
         btnCriarSala.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                sound.play();
+                //sound.play();
             }
         });
 
@@ -159,7 +161,7 @@ public class TelasJogo extends JFrame {
 				AudioClip bordao = Applet.newAudioClip(quemQuerDinheiro);
                 btnCriar.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        bordao.play();
+                        //bordao.play();
                     }
                 });
                 
@@ -195,9 +197,10 @@ public class TelasJogo extends JFrame {
         //ImageIcon imagem = new ImageIcon(getClass().getResource("tema.png"));
         JLabel labelImagem = new JLabel(imgTema);
         labelImagem.setBounds(-65, 260, 800, 500);
-
+		SelectWord sw = new SelectWord(null, null);
+		sw.WordRondon();
         // Cria um JLabel para o input
-        JLabel labelInput = new JLabel("Animal");
+        JLabel labelInput = new JLabel(sw.getTheme());
         labelInput.setBounds(285, 500, 200, 30);
         labelInput.setForeground(new Color(0x12346));
         labelInput.setFont(new Font("Georgia", Font.BOLD, 30));
@@ -226,8 +229,10 @@ public class TelasJogo extends JFrame {
             jogador[i].setFont(new Font("Georgia", Font.BOLD, 30));
             layeredPane.add(jogador[i], JLayeredPane.PALETTE_LAYER);
         }
+        
 
-        String palavra = "Cachorro";
+		System.out.println("Palavra recebida :" + sw.getWord());
+        String palavra = sw.getWord();
         JLabel[] letras = new JLabel[palavra.length()];
 
         for (int i = 0; i < palavra.length(); i++) {
@@ -302,6 +307,9 @@ public class TelasJogo extends JFrame {
 	
 	public static void main(String[] args) {
 		TelasJogo tela = new TelasJogo();
+		
+		
+		
 		
 	}
 }
