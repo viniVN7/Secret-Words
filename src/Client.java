@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.io.*;
 
@@ -28,8 +29,24 @@ public class Client {
 			//Enviar codgo da sala
 			out.writeBytes("1233" + "\n");
 			out.flush();
+			
 			BufferedReader inFromClient = new BufferedReader(
 					new InputStreamReader(ClientSocket.getInputStream()));
+			// Aguardando tamanho da String da palavra;
+			System.out.println("Aguardando o tamanho da palavra ");
+			String receiveWord = inFromClient.readLine();
+			System.out.println("palavra recebida :" + receiveWord);
+			char[] WordPosintion = new char [receiveWord.length()];
+			System.out.println(WordPosintion.length);
+			for(int i = 0; i < WordPosintion.length; i++) {
+				WordPosintion[i] = '*';
+			}
+			
+			for (char c : WordPosintion) {
+				System.out.println(c);
+			}
+			System.out.println();
+			
 			while (true) {
 				System.out.println("loop");
 	
@@ -59,11 +76,16 @@ public class Client {
 						while (!(posicao = inFromClient.readLine()).equals("fim")) {
 
 							System.out.println("Posicao: " + posicao);
+							
 							String letra = inFromClient.readLine();
 							System.out.println(letra);
-
+							char[] aux = letra.toCharArray();
+							WordPosintion[Integer.parseInt(posicao)] = aux[0];
 						}
 						
+					}
+					for (char c : WordPosintion) {
+						System.out.println(c);
 					}
 
 				} else if(menssagem.equals("2a")){
@@ -75,7 +97,11 @@ public class Client {
 						System.out.println("Posicao: " + posicao);
 						String letra = inFromClient.readLine();
 						System.out.println(letra);
-
+						char[] aux = letra.toCharArray();
+						WordPosintion[Integer.parseInt(posicao)] = aux[0];
+					}
+					for (char c : WordPosintion) {
+						System.out.println(c);
 					}
 					
 				}

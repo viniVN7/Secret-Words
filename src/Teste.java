@@ -4,27 +4,40 @@ public class Teste {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+		String a = "teste";
+
+		// System.out.println(a.length());
+		char[] b = new char[5];
+		b[0] = 't';
+		b[1] = 'e';
+		b[2] = 's';
+		b[3] = 't';
+		b[4] = 'e';
 		
-		int te = 1223;
+//		String str = new String(b);
+//		if(a.equals(str)) {
+//			System.out.println("entrou no if");
+//		}
+//		System.out.println(b.length);
+//
+//		for (char c : b) {
+//			System.out.println(c);
+//		}
 		
-		String a = Integer.toString(te);
+		int c = b.length;
 		
-		System.out.println(a.contains("7"));
-			
+		System.out.println(c);
 
 	}
-	
-	
-	public static char[]  stringToArray(String palavra) {
+
+	public static char[] stringToArray(String palavra) {
 		char[] vetorPalavra = new char[palavra.length()];
-		
+
 		char[] stringConvertida = palavra.toCharArray();
 		System.arraycopy(stringConvertida, 0, vetorPalavra, 0, stringConvertida.length);
 
-		
 		return vetorPalavra;
 	}
 
 }
-
-

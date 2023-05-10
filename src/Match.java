@@ -62,6 +62,12 @@ public class Match extends Thread {
 
 			// se o jogador vencedor ele sai de todos os loops
 			// se ele errar vai para o proximo jogador do para
+			
+			for (Socket c : this.lst) {
+				OutputStream outL = c.getOutputStream();
+				outL.write((this.Word + "\n").getBytes());
+			}
+			
 			while (true) {
 				for (Socket player : this.lst) {
 					hit = true;
@@ -70,7 +76,10 @@ public class Match extends Thread {
 						// Envia confirmação para o cliente
 
 						DataOutputStream out = new DataOutputStream(player.getOutputStream());
+						
 
+						
+						
 						System.out.println("Porta :" + player.getPort());
 						out.flush();
 						System.out.println("enviando");
@@ -82,7 +91,8 @@ public class Match extends Thread {
 						BufferedReader inFromMatch = new BufferedReader(new InputStreamReader(player.getInputStream()));
 
 						//sleep(1000);
-
+						
+						
 						String letra = inFromMatch.readLine();
 						System.out.println("Letra recepida: " + letra);
 						if (this.Word.contains(letra)) {
