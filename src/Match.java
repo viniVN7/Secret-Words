@@ -62,12 +62,12 @@ public class Match extends Thread {
 
 			// se o jogador vencedor ele sai de todos os loops
 			// se ele errar vai para o proximo jogador do para
-			
+
 			for (Socket c : this.lst) {
 				OutputStream outL = c.getOutputStream();
 				outL.write((this.Word + "\n").getBytes());
 			}
-			
+
 			while (true) {
 				for (Socket player : this.lst) {
 					hit = true;
@@ -76,12 +76,8 @@ public class Match extends Thread {
 						// Envia confirmação para o cliente
 
 						DataOutputStream out = new DataOutputStream(player.getOutputStream());
-						
 
-						
-						
 						System.out.println("Porta :" + player.getPort());
-						out.flush();
 						System.out.println("enviando");
 						out.write(("1a" + "\n").getBytes());
 						System.out.println("envaida");
@@ -90,14 +86,12 @@ public class Match extends Thread {
 						// Recebe letra do do cliente
 						BufferedReader inFromMatch = new BufferedReader(new InputStreamReader(player.getInputStream()));
 
-						//sleep(1000);
-						
-						
+						// sleep(1000);
+
 						String letra = inFromMatch.readLine();
 						System.out.println("Letra recepida: " + letra);
 						if (this.Word.contains(letra)) {
 
-							out.flush();
 							out.write(("s" + "\n").getBytes());
 							out.flush();
 
@@ -106,12 +100,12 @@ public class Match extends Thread {
 								OutputStream outC = c.getOutputStream();
 								if (player != c) {
 									outC.write(("2a" + "\n").getBytes());
+									outC.flush();
 								}
 								for (int i = 0; i < vetorWord.length; i++) {
 
 									if (vetorWord[i] == letra.charAt(0)) {
 
-										outC.flush();
 										outC.write((Integer.toString(i) + "\n").getBytes());
 										outC.flush();
 										outC.write((letra + "\n").getBytes());
@@ -119,9 +113,31 @@ public class Match extends Thread {
 
 									}
 								}
-								outC.flush();
 								outC.write(("fim" + "\n").getBytes());
 								outC.flush();
+							}
+	
+							System.out.println("esta aqui");
+							String campeao = inFromMatch.readLine();
+							System.out.println("menssagem do cliente :" + campeao);
+							if (campeao.equals("Venci")) {
+								for (Socket d : this.lst) {
+									OutputStream outCa = d.getOutputStream();
+									if (d == player) {
+										outCa.write(("Campeao" + "\n").getBytes());
+										outCa.flush();
+									} else {
+										outCa.write(("Perdeu" + "\n").getBytes());
+										outCa.flush();
+									}
+								}
+							} else {
+								for (Socket d : this.lst) {
+									OutputStream outCa = d.getOutputStream();
+									System.out.println("esta aqui");
+									outCa.write(("Continua" + "\n").getBytes());
+									outCa.flush();
+								}
 							}
 
 						} else {
@@ -130,13 +146,12 @@ public class Match extends Thread {
 								System.out.println("esta aqui no if");
 								hit = true;
 							} else {
-								out.flush();
 								out.write(("n" + "\n").getBytes());
 								out.flush();
 								hit = false;
 							}
 						}
-						inFromMatch = new BufferedReader(new InputStreamReader(player.getInputStream()));
+						//inFromMatch = new BufferedReader(new InputStreamReader(player.getInputStream()));
 					}
 				}
 			}

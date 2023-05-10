@@ -6,7 +6,14 @@ public class Teste {
 		// TODO Auto-generated method stub
 
 		String a = "teste";
-
+		char c;
+		
+		char[] oux = a.toCharArray();
+		
+		c = oux[0];
+		
+		
+		System.out.println(c);
 		// System.out.println(a.length());
 		char[] b = new char[5];
 		b[0] = 't';
@@ -25,9 +32,9 @@ public class Teste {
 //			System.out.println(c);
 //		}
 		
-		int c = b.length;
+		//int c = b.length;
 		
-		System.out.println(c);
+		//System.out.println(c);
 
 	}
 

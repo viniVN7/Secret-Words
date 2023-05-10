@@ -35,8 +35,13 @@ public class Client {
 			// Aguardando tamanho da String da palavra;
 			System.out.println("Aguardando o tamanho da palavra ");
 			String receiveWord = inFromClient.readLine();
+			int cont = 0;
 			System.out.println("palavra recebida :" + receiveWord);
 			char[] WordPosintion = new char [receiveWord.length()];
+			char[] letrasSelecting = new char[50];
+			for(int i = 0; i < letrasSelecting.length; i++) {
+				letrasSelecting[i] = '*';
+			}
 			System.out.println(WordPosintion.length);
 			for(int i = 0; i < WordPosintion.length; i++) {
 				WordPosintion[i] = '*';
@@ -60,17 +65,30 @@ public class Client {
 					System.out.println("Digite uma letra");
 					Scanner s = new Scanner(System.in);
 					String msn = s.nextLine();
+					String Exist = null;
+					for (int i = 0; i < letrasSelecting.length; i++) {
+
+						if (letrasSelecting[i] == msn.charAt(0)) {
+							System.out.println("letra repetida");
+							Exist = "0";
+						}
+					}
+					
 					//Enviando letra para o servidor 
+					if(Exist != "0") {
 					out.write((msn+"\n").getBytes());
 					out.flush();
-					
+					}else {
+						out.write(("#" + "\n").getBytes());
+						out.flush();
+					}
 					//Recebendo confirmação do servidor
 					String acept = inFromClient.readLine();
 
 
 					if (acept.equals("s")) {
 						System.out.println("ta na parte dois");
-
+						char b = ' ';
 						String posicao = null;
 						//Enquanto não receber "fim", ficar recebendo a letra e a posição da letra
 						while (!(posicao = inFromClient.readLine()).equals("fim")) {
@@ -80,17 +98,41 @@ public class Client {
 							String letra = inFromClient.readLine();
 							System.out.println(letra);
 							char[] aux = letra.toCharArray();
+							
 							WordPosintion[Integer.parseInt(posicao)] = aux[0];
+							b = aux[0];
 						}
 						
-					}
-					for (char c : WordPosintion) {
-						System.out.println(c);
-					}
+						letrasSelecting[cont] = b;
+						cont ++;
+						
+						for (char c : WordPosintion) {
+							System.out.println(c);
+						}
+						String str = new String(WordPosintion);
+						
+						if(receiveWord.equals(str)) {
+							System.out.println("temos um vencedor");
+							out.write(("Venci" + "\n").getBytes());
+							out.flush();
+						}
+						else {
+							System.out.println("Continua");
+							out.write(("nao" + "\n").getBytes());
+							out.flush();
+						}
+						System.out.println("esperando msn do servidor");
+						// Receber confirmação de vitoria ou continuação de partida
+						String endMatch = inFromClient.readLine();
+						System.out.println("Menssagem de fim partida :" + endMatch);
 
+					}
+					
+					
 				} else if(menssagem.equals("2a")){
 					
 					String posicao = null;
+					char b = ' ';
 					//Enquanto não receber "fim", ficar recebendo a letra e a posição da letra
 					while (!(posicao = inFromClient.readLine()).equals("fim")) {
 
@@ -99,12 +141,19 @@ public class Client {
 						System.out.println(letra);
 						char[] aux = letra.toCharArray();
 						WordPosintion[Integer.parseInt(posicao)] = aux[0];
+						b = aux[0];
 					}
 					for (char c : WordPosintion) {
 						System.out.println(c);
 					}
 					
+					letrasSelecting[cont] = b;
+					cont ++;
+					String endMatch = inFromClient.readLine();
+					System.out.println("Menssagem de fim partida :" + endMatch);
+					
 				}
+
 			}
 
 		} catch (Exception e) {
