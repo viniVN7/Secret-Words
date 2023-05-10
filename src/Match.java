@@ -70,32 +70,37 @@ public class Match extends Thread {
 						// Envia confirmação para o cliente
 
 						DataOutputStream out = new DataOutputStream(player.getOutputStream());
+
 						System.out.println("Porta :" + player.getPort());
 						out.flush();
-						out.write(("1" + "\n").getBytes());
+						System.out.println("enviando");
+						out.write(("1a" + "\n").getBytes());
+						System.out.println("envaida");
 						out.flush();
 						// sleep(500);
 						// Recebe letra do do cliente
 						BufferedReader inFromMatch = new BufferedReader(new InputStreamReader(player.getInputStream()));
 
-						sleep(1000);
+						//sleep(1000);
 
 						String letra = inFromMatch.readLine();
 						System.out.println("Letra recepida: " + letra);
 						if (this.Word.contains(letra)) {
-							for (Socket s : this.lst) {
-								out.flush();
-								out.write(("s" + "\n").getBytes());
-								out.flush();
-							}
+
+							out.flush();
+							out.write(("s" + "\n").getBytes());
+							out.flush();
 
 							for (Socket c : this.lst) {
+
 								OutputStream outC = c.getOutputStream();
+								if (player != c) {
+									outC.write(("2a" + "\n").getBytes());
+								}
 								for (int i = 0; i < vetorWord.length; i++) {
-									
-									
+
 									if (vetorWord[i] == letra.charAt(0)) {
-										
+
 										outC.flush();
 										outC.write((Integer.toString(i) + "\n").getBytes());
 										outC.flush();
@@ -110,8 +115,7 @@ public class Match extends Thread {
 							}
 
 						} else {
-							
-							
+
 							if (this.Word.contains(letra)) {
 								System.out.println("esta aqui no if");
 								hit = true;
@@ -121,7 +125,8 @@ public class Match extends Thread {
 								out.flush();
 								hit = false;
 							}
-						}inFromMatch = new BufferedReader(new InputStreamReader(player.getInputStream()));
+						}
+						inFromMatch = new BufferedReader(new InputStreamReader(player.getInputStream()));
 					}
 				}
 			}

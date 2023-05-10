@@ -11,43 +11,40 @@ public class Client {
 			System.out.println("Entrar em partida existente");
 			System.out.println("Entrar em partida");
 
-			Socket ClientSocket = new Socket("10.50.164.168", 8000);
+			Socket ClientSocket = new Socket("localhost", 8000);
 
 
-			DataOutputStream outOptionMatch = new DataOutputStream(ClientSocket.getOutputStream());
+			DataOutputStream out = new DataOutputStream(ClientSocket.getOutputStream());
 			
 			//Enviar opção partida
-			outOptionMatch.flush();
-			outOptionMatch.writeBytes("1" + "\n");
-			outOptionMatch.flush();
+			
+			out.writeBytes("1" + "\n");
+			out.flush();
 			
 			//Enviar quanditades de jogadores
-			outOptionMatch.writeBytes("1" + "\n");
-			outOptionMatch.flush();
+			out.writeBytes("1" + "\n");
+			out.flush();
 			
 			//Enviar codgo da sala
-			outOptionMatch.writeBytes("1233" + "\n");
-			outOptionMatch.flush();
-			
+			out.writeBytes("1233" + "\n");
+			out.flush();
+			BufferedReader inFromClient = new BufferedReader(
+					new InputStreamReader(ClientSocket.getInputStream()));
 			while (true) {
 				System.out.println("loop");
-
-				BufferedReader inFromClient = new BufferedReader(
-						new InputStreamReader(ClientSocket.getInputStream()));
+	
 				//Recebendo confirmação do servidor
 				String menssagem = inFromClient.readLine();
+				
 				System.out.println("esta aqui depois do loop");
 				System.out.println("menssagem " + menssagem);
-				if (menssagem.equals("1")) {
-					// 
-					DataOutputStream out = new DataOutputStream(ClientSocket.getOutputStream());
-					out.flush();
-					
+				if (menssagem.equals("1a")) {
+					// 		
 					System.out.println("Digite uma letra");
 					Scanner s = new Scanner(System.in);
-					String msn = s.nextLine();
+					//String msn = s.nextLine();
 					//Enviando letra para o servidor 
-					out.write((msn+"\n").getBytes());
+					out.write(("M"+"\n").getBytes());
 					out.flush();
 					
 					//Recebendo confirmação do servidor
@@ -66,13 +63,13 @@ public class Client {
 							System.out.println(letra);
 
 						}
-						inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
-				
-
+						
 					}
-				} else {
 
+				} else if(menssagem.equals("2a")){
+					
 					String posicao = null;
+					//Enquanto não receber "fim", ficar recebendo a letra e a posição da letra
 					while (!(posicao = inFromClient.readLine()).equals("fim")) {
 
 						System.out.println("Posicao: " + posicao);
@@ -80,7 +77,7 @@ public class Client {
 						System.out.println(letra);
 
 					}
-					inFromClient = new BufferedReader(new InputStreamReader(ClientSocket.getInputStream()));
+					
 				}
 			}
 
