@@ -131,6 +131,7 @@ public class Match extends Thread {
 										outCa.flush();
 									}
 								}
+								stop();
 							} else {
 								for (Socket d : this.lst) {
 									OutputStream outCa = d.getOutputStream();

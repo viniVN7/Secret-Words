@@ -124,6 +124,9 @@ public class Client {
 						System.out.println("esperando msn do servidor");
 						// Receber confirmação de vitoria ou continuação de partida
 						String endMatch = inFromClient.readLine();
+						if(endMatch.equals("Campeao")) {
+							ClientSocket.close();
+						}
 						System.out.println("Menssagem de fim partida :" + endMatch);
 
 					}
@@ -150,6 +153,9 @@ public class Client {
 					letrasSelecting[cont] = b;
 					cont ++;
 					String endMatch = inFromClient.readLine();
+					if(endMatch.equals("Perdeu")) {
+						ClientSocket.close();
+					}
 					System.out.println("Menssagem de fim partida :" + endMatch);
 					
 				}
