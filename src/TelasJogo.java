@@ -188,6 +188,9 @@ public class TelasJogo extends JFrame {
 		menuCriarSala.setResizable(false);
 		menuCriarSala.dispose();
 
+		SelectWord sw = new SelectWord(null, null);
+		sw.WordRondon();
+
 		// Cria um JLayeredPane para colocar os componentes em camadas
 		JLayeredPane layeredPane = new JLayeredPane();
 
@@ -197,7 +200,7 @@ public class TelasJogo extends JFrame {
 		labelImagem.setBounds(-65, 260, 800, 500);
 
 		// Cria um JLabel para o input
-		JLabel labelInput = new JLabel("Animal");
+		JLabel labelInput = new JLabel(sw.getTheme());
 		labelInput.setBounds(285, 500, 200, 30);
 		labelInput.setForeground(new Color(0x12346));
 		labelInput.setFont(new Font("Georgia", Font.BOLD, 30));
@@ -226,8 +229,6 @@ public class TelasJogo extends JFrame {
 			jogador[i].setFont(new Font("Georgia", Font.BOLD, 30));
 			layeredPane.add(jogador[i], JLayeredPane.PALETTE_LAYER);
 		}
-		SelectWord sw = new SelectWord(null, null);
-		sw.WordRondon();
 		String palavra = sw.getWord();
 		System.out.println("Palavra " + palavra);
 		JLabel[] letras = new JLabel[palavra.length()];

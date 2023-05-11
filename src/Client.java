@@ -14,23 +14,24 @@ public class Client {
 			DataOutputStream out = new DataOutputStream(ClientSocket.getOutputStream());
 
 			// Enviar opção partida
-			Scanner p = new Scanner(System.in);
+			Scanner input = new Scanner(System.in);
 			System.out.println("Criar partida privada: Digite 1");
 			System.out.println("Entrar em partida existente: Digite 2");
-			String partida = p.nextLine();
+			String partida = input.nextLine();
 			String player;
 			String qntPlay = "7";
 			String codRoom = null;
+
 			if (partida.equals("1")) {
 				System.out.println("Digite o numero de jogadores");
-				qntPlay = p.nextLine();
+				qntPlay = input.nextLine();
 
 				System.out.println("Digite o codigo da sala");
-				codRoom = p.nextLine();
+				codRoom = input.nextLine();
 
 			} else if (partida.equals("2")) {
 				System.out.println("Digite o codigo da sala");
-				codRoom = p.nextLine();
+				codRoom = input.nextLine();
 			}
 
 			out.writeBytes(partida + "\n");
@@ -61,14 +62,14 @@ public class Client {
 
 			jump();
 
-			char[] WordPosintion = new char[receiveWord.length()];
+			char[] wordPosintion = new char[receiveWord.length()];
 			char[] letrasSelecting = new char[50];
 			for (int i = 0; i < 50; i++) {
 				letrasSelecting[i] = '*';
 			}
 
-			for (int i = 0; i < WordPosintion.length; i++) {
-				WordPosintion[i] = '*';
+			for (int i = 0; i < wordPosintion.length; i++) {
+				wordPosintion[i] = '*';
 			}
 
 			jump();
@@ -80,16 +81,16 @@ public class Client {
 				System.out.println("Aguarde");
 				jump();
 
-				System.out.println("Tema " + receiveThema);
+				System.out.println("Tema: " + receiveThema);
 				jump();
-				System.out.println("Palavra com " + WordPosintion.length + " letras");
+				System.out.println("Palavra com " + wordPosintion.length + " letras");
 				jump();
-				for (char c : WordPosintion) {
+				for (char c : wordPosintion) {
 					System.out.print(" " + c + " ");
 				}
 
 				jump();
-				System.out.println("Letras que ja foram digitadas");
+				System.out.println("\n" + "Letras que ja foram digitadas");
 				jump();
 				if (cont >= 0) {
 					for (int i = 0; i < letrasSelecting.length; i++) {
@@ -105,7 +106,7 @@ public class Client {
 				if (menssagem.equals("1a")) {
 					//
 					jump();
-					System.out.println("Sua vez");
+					System.out.println("� a sua vez");
 					System.out.print("Digite uma letra :");
 					Scanner s = new Scanner(System.in);
 					String msn = s.nextLine();
@@ -134,24 +135,21 @@ public class Client {
 						String posicao = null;
 						// Enquanto não receber "fim", ficar recebendo a letra e a posição da letra
 						while (!(posicao = inFromClient.readLine()).equals("fim")) {
-
-							System.out.println("Posicao: " + posicao);
-
+							//System.out.println("Posicao: " + posicao);
 							String letra = inFromClient.readLine();
 							System.out.println(letra);
 							char[] aux = letra.toCharArray();
 
-							WordPosintion[Integer.parseInt(posicao)] = aux[0];
+							wordPosintion[Integer.parseInt(posicao)] = aux[0];
 							b = aux[0];
 						}
 
 						letrasSelecting[cont] = b;
 						cont++;
 
-						String str = new String(WordPosintion);
+						String str = new String(wordPosintion);
 
 						if (receiveWord.equals(str)) {
-
 							out.write(("Venci" + "\n").getBytes());
 							out.flush();
 						} else {
@@ -163,7 +161,7 @@ public class Client {
 						// Receber confirmação de vitoria ou continuação de partida
 						String endMatch = inFromClient.readLine();
 						if (endMatch.equals("Campeao")) {
-							System.out.println("Campeao");
+							System.out.println("\n" + "Parab�ns, voc� venceu!");
 							ClientSocket.close();
 							break;
 						}
@@ -172,7 +170,6 @@ public class Client {
 
 						char b = ' ';
 						char[] aux = msn.toUpperCase().toCharArray();
-						System.out.println("Letra no else" + msn);
 						b = aux[0];
 						System.out.println(b);
 
@@ -188,16 +185,15 @@ public class Client {
 					char b = ' ';
 					// Enquanto não receber "fim", ficar recebendo a letra e a posição da letra
 					while (!(posicao = inFromClient.readLine()).equals("fim")) {
-
-						System.out.println("Posicao: " + posicao);
+						//System.out.println("Posicao: " + posicao);
 						String letra = inFromClient.readLine();
 						System.out.println(letra);
 						char[] aux = letra.toCharArray();
-						WordPosintion[Integer.parseInt(posicao)] = aux[0];
+						wordPosintion[Integer.parseInt(posicao)] = aux[0];
 
 						b = aux[0];
 					}
-					for (char c : WordPosintion) {
+					for (char c : wordPosintion) {
 						System.out.print(" " + c + " ");
 					}
 

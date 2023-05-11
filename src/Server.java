@@ -11,17 +11,9 @@ public class Server {
 
 	public static void main(String[] args) {
 
-		// Apenas para testar o m�todo criado
-		/*
-		SelectWord themeWord = new SelectWord(null, null);		
-		themeWord.WordRondon();
-		System.out.println(themeWord.getTheme() + " " + themeWord.getWord());
-
-		Match.stringToArray(themeWord.getWord());
-		*/
 		try {
-
 			ServerSocket server = new ServerSocket(8000);
+			
 			while (true) {
 				Socket s = server.accept();
 
@@ -42,17 +34,17 @@ public class Server {
 					SelectWord sw = new SelectWord(null, null);
 					sw.WordRondon();
 					
-					System.out.println("palavra :" + sw.getWord() + "Tema: " + sw.getTheme() );
+					System.out.println("Tema: " + sw.getTheme());
+					System.out.println("Palavra: " + sw.getWord());
+					
 					Match match = new Match(lstS, qntplay, room, sw.getTheme(),sw.getWord().toUpperCase());
 					matches.add(match);
-					match.lst.add(s);
-					
+					match.lst.add(s);		
 					
 					if (match.lst.size() == qntplay) {
 						match.start();
 					}
 				} else if (opcaoPartida == ENTRAR_SALA) {
-
 					for (Match partida : matches) {
 						if(partida.getCodRoom() == room) {
 							partida.lst.add(s);
@@ -74,7 +66,7 @@ public class Server {
 				}
 
 
-				System.out.println("chegou aqui!!!");
+				//System.out.println("chegou aqui!!!");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
