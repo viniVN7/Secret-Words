@@ -163,8 +163,9 @@ public class Client {
 						// Receber confirmação de vitoria ou continuação de partida
 						String endMatch = inFromClient.readLine();
 						if (endMatch.equals("Campeao")) {
-							System.out.println("esta aqui");
+							System.out.println("Campeao");
 							ClientSocket.close();
+							break;
 						}
 
 					} else {
