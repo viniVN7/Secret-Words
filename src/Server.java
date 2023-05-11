@@ -43,7 +43,7 @@ public class Server {
 					sw.WordRondon();
 					
 					System.out.println("palavra :" + sw.getWord() + "Tema: " + sw.getTheme() );
-					Match match = new Match(lstS, qntplay, room, sw.getTheme(),sw.getWord());
+					Match match = new Match(lstS, qntplay, room, sw.getTheme(),sw.getWord().toUpperCase());
 					matches.add(match);
 					match.lst.add(s);
 					

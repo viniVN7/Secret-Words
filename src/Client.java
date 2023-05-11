@@ -8,9 +8,7 @@ public class Client {
 	public static void main(String[] args) {
 
 		try {
-			System.out.println("Criar partida privada");
-			System.out.println("Entrar em partida existente");
-			System.out.println("Entrar em partida");
+
 
 			Socket ClientSocket = new Socket("localhost", 8000);
 
@@ -18,16 +16,34 @@ public class Client {
 			DataOutputStream out = new DataOutputStream(ClientSocket.getOutputStream());
 			
 			//Enviar opção partida
+			Scanner p = new Scanner(System.in);
+			System.out.println("Criar partida privada: Digite 1");
+			System.out.println("Entrar em partida existente: Digite 2");
+			String partida = p.nextLine();
+			String player ;
+			String qntPlay =  "7";
+			String codRoom = null;
+			if (partida.equals("1")) {
+				System.out.println("Digite o numero de jogadores");
+				qntPlay = p.nextLine();
+
+				System.out.println("Digite o codigo da sala");
+				codRoom = p.nextLine();
+
+			}else if(partida.equals("2")){
+				System.out.println("Digite o codigo da sala");
+				codRoom = p.nextLine();
+			}
 			
-			out.writeBytes("2" + "\n");
+			out.writeBytes(partida + "\n");
 			out.flush();
 			
 			//Enviar quanditades de jogadores
-			out.writeBytes("2" + "\n");
+			out.writeBytes(qntPlay + "\n");
 			out.flush();
 			
 			//Enviar codgo da sala
-			out.writeBytes("1233" + "\n");
+			out.writeBytes( codRoom + "\n");
 			out.flush();
 			
 			BufferedReader inFromClient = new BufferedReader(
