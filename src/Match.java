@@ -66,6 +66,8 @@ public class Match extends Thread {
 			for (Socket c : this.lst) {
 				OutputStream outL = c.getOutputStream();
 				outL.write((this.Word + "\n").getBytes());
+				outL.flush();
+				outL.write((this.theme + "\n").getBytes());
 			}
 
 			while (true) {

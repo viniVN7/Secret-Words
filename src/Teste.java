@@ -7,12 +7,11 @@ public class Teste {
 
 		String a = "teste";
 		char c;
-		
+
 		char[] oux = a.toCharArray();
-		
+
 		c = oux[0];
-		
-		
+
 		System.out.println(c);
 		// System.out.println(a.length());
 		char[] b = new char[5];
@@ -21,7 +20,7 @@ public class Teste {
 		b[2] = 's';
 		b[3] = 't';
 		b[4] = 'e';
-		
+
 //		String str = new String(b);
 //		if(a.equals(str)) {
 //			System.out.println("entrou no if");
@@ -31,10 +30,11 @@ public class Teste {
 //		for (char c : b) {
 //			System.out.println(c);
 //		}
-		
-		//int c = b.length;
-		
-		//System.out.println(c);
+
+		// int c = b.length;
+
+		// System.out.println(c);
+		clear();
 
 	}
 
@@ -46,5 +46,20 @@ public class Teste {
 
 		return vetorPalavra;
 	}
+
+
+		public static void clear() {
+			try {
+				String os = System.getProperty("os.name").toLowerCase();
+				if (os.contains("windows")) {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} else {
+					Runtime.getRuntime().exec("clear");
+				}
+			} catch (Exception e) {
+				System.out.println("Erro ao limpar o console do terminal: " + e.getMessage());
+			}
+		}
+	
 
 }
