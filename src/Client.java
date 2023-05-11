@@ -123,7 +123,7 @@ public class Client {
 						cont ++;
 						
 						for (char c : WordPosintion) {
-							System.out.println(c);
+							System.out.print(" "+c + " ");
 						}
 						String str = new String(WordPosintion);
 						
@@ -163,7 +163,7 @@ public class Client {
 						b = aux[0];
 					}
 					for (char c : WordPosintion) {
-						System.out.println(c);
+						System.out.print(" "+c + " ");
 					}
 					
 					letrasSelecting[cont] = b;
